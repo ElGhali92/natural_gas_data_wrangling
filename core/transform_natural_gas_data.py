@@ -16,7 +16,7 @@ def transform_date_column(data, granularity):
     if granularity == "monthly":
         data["Date"] = data["Date"].apply(lambda d: d.replace(day=1))
     elif granularity == "annual":
-        data["Date"] = data["Date"].dt.year
+        data["Date"] = data["Date"].apply(lambda d: d.replace(day=1, month=1))
     return data
 
 
@@ -24,9 +24,7 @@ def year_week(data):
     data["week_number"] = data["Date"].dt.week
     data["week_number"] = data["week_number"].apply(str)
     data["year-week"] = (
-        data["Date"].apply(lambda x: str(x.year)
-        + "-"
-        + data["week_number"]
+        data["Date"].apply(lambda x: str(x.year)) + "-" + data["week_number"]
     )
     return data
 
@@ -35,36 +33,36 @@ def fill_daily_missing_values(data):
     price_array = np.array(data["Price"])
     missing_values_pos = list(np.where(np.isnan(price_array)))
     data = year_week(data)
-            for i in missing_values_pos:
-                yw = data.loc[i, "year-week"]
-                subdata = data[data["year-week"] == yw]
-                filling_value = subdata["Price"].mean()
-                data.iloc[i]["Price"] = filling_value
-                return data
+    for i in missing_values_pos:
+        yw = data.loc[i, "year-week"]
+        subdata = data[data["year-week"] == yw]
+        filling_value = subdata["Price"].mean()
+        data.iloc[i]["Price"] = filling_value
+    return data
 
 
 def fill_weekly_missing_values(data):
-    data[year_month] = data['Date'].apply(lambda x : str(x.year) + '-' + str(x.month))
-            price_array = np.array(data["Price"])
-            missing_values_pos = list(np.where(np.isnan(price_array)))
-            for i in missing_values_pos:
-                ym = data.loc[i, "year-month"]
-                subdata = data[data["year-month"] == ym]
-                filling_value = subdata["Price"].mean()
-                data.iloc[i]["Price"] = filling_value
-                return data
+    data["year_month"] = data["Date"].apply(lambda x: str(x.year) + "-" + str(x.month))
+    price_array = np.array(data["Price"])
+    missing_values_pos = list(np.where(np.isnan(price_array)))
+    for i in missing_values_pos:
+        ym = data.loc[i, "year-month"]
+        subdata = data[data["year-month"] == ym]
+        filling_value = subdata["Price"].mean()
+        data.iloc[i]["Price"] = filling_value
+    return data
 
 
 def fill_monthly_missing_values(data):
-    data[year] = data['Date'].dt.year.apply(str)
-            price_array = np.array(data["Price"])
-            missing_values_pos = list(np.where(np.isnan(price_array)))
-            for i in missing_values_pos:
-                y = data.loc[i, "year"]
-                subdata = data[data["year"] == y]
-                filling_value = subdata["Price"].mean()
-                data.iloc[i]["Price"] = filling_value
-                return data
+    data["year"] = data["Date"].dt.year.apply(str)
+    price_array = np.array(data["Price"])
+    missing_values_pos = list(np.where(np.isnan(price_array)))
+    for i in missing_values_pos:
+        y = data.loc[i, "year"]
+        subdata = data[data["year"] == y]
+        filling_value = subdata["Price"].mean()
+        data.iloc[i]["Price"] = filling_value
+    return data
 
 
 def price_missing_values(data, granularity):
@@ -72,7 +70,7 @@ def price_missing_values(data, granularity):
         data = data.dropna()
         return data
     else:
-        if granularity == 'daily':
+        if granularity == "daily":
             data = fill_daily_missing_values(data)
             return data
         elif granularity == "weekly":
@@ -83,7 +81,7 @@ def price_missing_values(data, granularity):
             return data
         else:
             filling_value = data["Price"].mean()
-            data["Price"] = data["Price"].fillna(value = filling_value)
+            data["Price"] = data["Price"].fillna(value=filling_value)
             return data
 
 
