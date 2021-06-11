@@ -30,7 +30,7 @@ Input data can be found at  http://www.eia.gov/dnav/ng/hist/rngwhhdm.htm
           missing price belongs to)
         - Finally for annual prices fill with mean price accross all years (ie: acrross thhe entire annual dataset)  
 
-    The default behaviour is to drop records with price missing values but can be changed to fill price missing values by setting PRICE_MISSING_VALUES environment variable to fill.
+      The default behaviour is to drop records with price missing values but can be changed to fill price missing values by setting PRICE_MISSING_VALUES environment variable to fill
   
   - Loading data:
     - Exporting data into csv files by default (could be exported into different formats by setting the OUTPUT_EXTENSION environment variable to another value than csv)
