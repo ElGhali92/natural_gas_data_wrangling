@@ -1,0 +1,90 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "name": "natural_gas_daily.prices.csv",
+      "path": "data/natural_gas_daily_prices.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "Date",
+            "type": "datetime",
+            "format": "default"
+          },
+          {
+            "name": "Price",
+            "type": "number",
+            "format": "default"
+          }
+        ]
+      }
+    },
+    {
+      "name": "natural_gas_weekly_prices.csv",
+      "path": "data/natural_gas_weekly_prices.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "Date",
+            "type": "datetime",
+            "format": "default"
+          },
+          {
+            "name": "Price",
+            "type": "number",
+            "format": "default"
+          }
+        ]
+      }
+    },
+    {
+      "name": "natural_gas_monthly_prices.csv",
+      "path": "data/natural_gas_monthly_prices.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "Date",
+            "type": "datetime",
+            "format": "default"
+          },
+          {
+            "name": "Price",
+            "type": "number",
+            "format": "default"
+          }
+        ]
+      }
+    },
+    {
+      "name": "natural_gas_annual_prices.csv",
+      "path": "data/natural_gas_annual_prices.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "Date",
+            "type": "datetime",
+            "format": "default"
+          },
+          {
+            "name": "Price",
+            "type": "number",
+            "format": "default"
+          }
+        ]
+      }
+    }
+  ],
+  "name": "natural-gas-prices-data-package",
+  "title": "Natural Gas Prices Data Package",
+  "homepage": "https://www.eia.gov/dnav/ng/hist/rngwhhdD.htm",
+  "contributors": [
+    {
+      "title": "TAZI El Ghali",
+      "role": "author"
+    }
+  ]
+}
