@@ -11,6 +11,6 @@ henry_hub_gas_data_source = {
 
 price_missing_values = os.getenv("PRICE_MISSING_VALUES", "drop")
 
-output_dir = os.getenv("OUTPUT_DIR", "output/")
+output_dir = os.getenv("OUTPUT_DIR", "data/")
 
 output_extension = os.getenv("OUTPUT_EXTENSION", "csv")
